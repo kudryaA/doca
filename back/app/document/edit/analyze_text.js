@@ -34,8 +34,3 @@ exports.createConsumer = (client, channel) => {
     noAck: true
   });
 }
-
-/*
- 
-        
-*/
