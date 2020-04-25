@@ -30,7 +30,7 @@ def analyze():
     channel.queue_declare(queue='analyze_text_result', durable=True)
     channel.basic_publish(exchange='',
         routing_key='analyze_text_result',
-        body=json.dumps(str(result)),
+        body=json.dumps(result),
         properties=pika.BasicProperties(
         delivery_mode = 2
     ))

@@ -1,1 +1,3 @@
 storage/app/storage/*
+back/node_modules/*
+analyze_docx/.idea/*
