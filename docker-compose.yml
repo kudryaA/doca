@@ -42,6 +42,12 @@ services:
       NAME: "rabbitmq"
     volumes:
       - rabbit_data:/var/lib/rabbitmq
+  analyze_docx:
+    image: analyze_docx
+    hostname: analyze_docx
+    build: ./analyze_docx
+    ports:
+      - 7001:7001
   analyze_image:
     image: analyze_image
     hostname: analyze_image
