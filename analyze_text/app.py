@@ -7,7 +7,7 @@ import json
 
 def analyzeText(text_en):
     text_en = text_en.replace('\n', ' ').replace('\t', ' ')
-    paragraf = keywords(text_en, words = 10,scores = False, lemmatize = True).split('\n')
+    paragraf = keywords(text_en, words = 10,scores = False, lemmatize = True).split('.')
     vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(text_en.split('.'))
     res = []

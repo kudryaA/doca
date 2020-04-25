@@ -27,7 +27,9 @@ def prepareImage(data):
 def analyzeImage(image):
   processed_image = vgg16.preprocess_input(image.copy())
   predictions = vgg_model.predict(processed_image)
-  labels = decode_predictions(predictions)
+  labels = []
+  for item in decode_predictions(predictions)[0]:
+    labels.append(item[1])
   return labels
 
 class Analyze(Thread):
