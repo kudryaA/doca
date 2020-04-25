@@ -40,8 +40,7 @@ class Analyze(Thread):
         image = prepareImage(self.data)
         labels = analyzeImage(image)
         result = { 'id': self.id, 'value': labels }
-        connection = pika.BlockingConnection(pika.ConnectionParameters(
-               'rabbitmq'))
+        connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
         channel = connection.channel()
         channel.queue_declare(queue='analyze_image_result', durable=True)
         channel.basic_publish(exchange='',

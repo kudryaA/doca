@@ -3,12 +3,12 @@ version: '3'
 services:
   elasticsearch:
     restart: always
-    image: amazon/opendistro-for-elasticsearch:1.1.0
+    image: amazon/opendistro-for-elasticsearch:1.6.0
     hostname: elasticsearch
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
     ulimits:
       memlock:
         soft: -1
@@ -22,7 +22,7 @@ services:
       - esdata:/usr/share/elasticsearch/data
   kibana:
     restart: always
-    image: amazon/opendistro-for-elasticsearch-kibana:1.1.0
+    image: amazon/opendistro-for-elasticsearch-kibana:1.6.0
     hostname: kibana
     ports:
       - 5601:5601
@@ -48,6 +48,12 @@ services:
     build: ./analyze_image
     ports:
       - 1490:1490
+  analyze_text:
+    image: analyze_text
+    hostname: analyze_text
+    build: ./analyze_text
+    ports:
+      - 1491:1491
 
 
 volumes:
