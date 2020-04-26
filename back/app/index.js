@@ -4,6 +4,7 @@ const elasticsearch = require('elasticsearch');
 const initialDocument = require('./document/edit/initial');
 const analyzeText = require('./document/edit/analyze_text');
 const analyzeImage = require('./document/edit/analyze_image');
+const analyzeDocx= require('./document/edit/analyze_docx');
 
 
 const init = async () => {
@@ -16,7 +17,7 @@ const init = async () => {
   await server.start();
   console.log('Server running on %s', server.info.uri);
 
-  amqp.connect(`amqp://localhost`,
+  amqp.connect(`amqp://rabbitmq`,
     async (error0, connection) => {
       if (error0) {
         throw error0;
@@ -26,7 +27,7 @@ const init = async () => {
           throw error1;
         }
         const client = new elasticsearch.Client({
-          host: 'https://admin:admin@0.0.0.0:9200',
+          host: 'https://admin:admin@elasticsearch:9200',
           port: 9200,
           protocol: 'https',
           username: 'admin:admin',
@@ -36,6 +37,7 @@ const init = async () => {
         await initialDocument.createConsumer(client, channel);
         await analyzeImage.createConsumer(client, channel);
         await analyzeText.createConsumer(client, channel);
+        await analyzeDocx.createConsumer(client, channel);
       });
     });
 };
