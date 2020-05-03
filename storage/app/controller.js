@@ -17,6 +17,7 @@ exports.createController = (app, configuration) => {
               res.send({ status: false, comment });
             } else {
               res.send({ status: true, path: path.pathRelative });
+              res.status(204);
             }
           });
         } else {

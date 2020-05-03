@@ -7,7 +7,7 @@ exports.createConsumer = (client, channel) => {
     const textMessage = msg.content.toString();
     try {
       const message = JSON.parse(textMessage);
-      const { id, url, about } = message;
+      const { id, name, url, about } = message;
       const findExists = (await client.search({
         index: 'documents',
         body: {
@@ -26,7 +26,8 @@ exports.createConsumer = (client, channel) => {
           type: '_doc',
           id,
           body: {
-            id, url, about
+            id, url, about, name,
+            time: new Date()
           }
         });
       } 

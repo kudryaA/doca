@@ -3,3 +3,5 @@ back/node_modules/*
 analyze_docx/.idea/*
 .vscode/*
 analyze_docx/target/*
+storage/node_modules/*
+storage/.vscode/*
